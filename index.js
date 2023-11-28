@@ -32,14 +32,13 @@ function cellBackgrounds() {
   const removedImgArr = [];
   const imgLength = 8;
   for (let i = 0; i < imgLength; i++) {
-    const randomNum = Math.floor(Math.random() * imageCells.length);
-    const removedImageIndex = imageCells[randomNum];
-    removedImgArr.push(removedImageIndex);
-    for (const img of removedImgArr) {
+     const randomNum = Math.floor(Math.random() * imageCells.length);
+     const removedImageIndex = imageCells[randomNum];
+     for (const img of removedImgArr) {
       img.removeAttribute("src");
     }
+    removedImgArr.push(removedImageIndex);
   }
-
   setTimeout(opacity, 2000);
   cells.forEach((cell) => cell.addEventListener("click", cellClicked));
 }
@@ -57,12 +56,12 @@ function cellClicked() {
     //if the last element at the correct index in the imgCellArr is
     //clicked then you win and all cells turn green!
     for (const correctCell of combinedCellArr) {
-      if (combinedCellArr.length >= 8) {
+      if (combinedCellArr.length >= 10) {
         if (combinedCellArr.lastIndexOf(correctCell) === combinedCellArr.length - 1){
           for (const cell0 of cells) {
           cell0.style.backgroundColor = "#0f0";
           cell0.removeEventListener("click", cellClicked);
-          statusText.textContent = "Congrats You win!";
+          statusText.textContent = "Congrats You win!🎉🎊";
         }
       }
     }
