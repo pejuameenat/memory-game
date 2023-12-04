@@ -14,38 +14,34 @@ const imgArr = [
   "./images/up.png",
 ];
 
-function opacity() {
-  for (const img of imageCells) {
-    img.classList.add("opacity");
-  }
+function addOpacity(){
+    imageCells.forEach(img => img.classList.add("opacity"));
 }
-
 function cellBackgrounds() {
-  // generate different images
+  cellClicked = true;
+  
   const randomIndex = Math.floor(Math.random() * imgArr.length);
   const randomImage = imgArr[randomIndex];
   for (const img of imageCells) {
     img.setAttribute("src", randomImage);
   }
 
-  // generate 8 random indexes and  and delete the src attribute of the images at that index
   const removedImgArr = [];
   const imgLength = 8;
   for (let i = 0; i < imgLength; i++) {
      const randomNum = Math.floor(Math.random() * imageCells.length);
      const removedImageIndex = imageCells[randomNum];
      for (const img of removedImgArr) {
-      img.removeAttribute("src");
+      img.setAttribute("src", '');
     }
     removedImgArr.push(removedImageIndex);
   }
-  setTimeout(opacity, 2000);
+  setTimeout(addOpacity, 2000);
   cells.forEach((cell) => cell.addEventListener("click", cellClicked));
 }
 
 startBtn.addEventListener("click", cellBackgrounds);
 
-//check if the cell clicked has an image with a src attribute.
 const correctCells = [];
 function cellClicked() {
   const cellIndex = this.getAttribute("cellIndex");
@@ -53,10 +49,9 @@ function cellClicked() {
     this.style.backgroundColor = "#0f0";
      correctCells.push(imageCells[cellIndex])
     const combinedCellArr = [...correctCells]
-    //if the last element at the correct index in the imgCellArr is
-    //clicked then you win and all cells turn green!
+    //if the last element at the correct index is clicked win!
     for (const correctCell of combinedCellArr) {
-      if (combinedCellArr.length >= 10) {
+      if (combinedCellArr.length >= 9) {
         if (combinedCellArr.lastIndexOf(correctCell) === combinedCellArr.length - 1){
           for (const cell0 of cells) {
           cell0.style.backgroundColor = "#0f0";
@@ -72,6 +67,6 @@ function cellClicked() {
   }
 }
 
-restartBtn.addEventListener("click", function () {
+restartBtn.addEventListener("click", function(){
   window.location.reload();
 });
