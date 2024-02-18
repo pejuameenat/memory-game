@@ -51,7 +51,7 @@ body{
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   width: 350px;
-  margin: 0 auto;
+  margin: 4rem auto  0 ;
 }
 img{
     max-width: 100%;
@@ -92,7 +92,7 @@ button{
   font-size: 3.5rem;
   color: #f00;
   position: absolute;
-   top: 25%;
+   top: 27%;
   left: 50%;
   transform: translate(-50%, -50%);
   animation: breathe 1000ms linear 1;
