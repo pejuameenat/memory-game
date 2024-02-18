@@ -3,6 +3,9 @@ const imageCells = document.querySelectorAll(".img-cell");
 const startBtn = document.querySelector(".start");
 const restartBtn = document.querySelector(".restart");
 const statusText = document.querySelector(".status-text");
+const timeText = document.querySelector('.time')
+// const gameOver = document.querySelector('.loser')
+
 
 const imgArr = [
   "./images/arrow-down.png",
@@ -14,12 +17,25 @@ const imgArr = [
   "./images/up.png",
 ];
 
+let timer = 10
+//Adding opacity to the cells
 function addOpacity(){
     imageCells.forEach(img => img.classList.add("opacity"));
 }
+// timer count down
+//  function countDown() {
+//      timer--
+//      timeText.textContent = '00:' + timer
+//       const timerFuc = setInterval(countDown, 1000)
+//       if (timer < 1) {
+//         timer = 0
+//         clearInterval(timerFuc)
+//         gameOver.classList.remove('hide')
+//       }
+//  }
+ //Adding ackgrounds
 function cellBackgrounds() {
-  cellClicked = true;
-  
+  //  cost cellClicked = true;
   const randomIndex = Math.floor(Math.random() * imgArr.length);
   const randomImage = imgArr[randomIndex];
   for (const img of imageCells) {
@@ -32,24 +48,25 @@ function cellBackgrounds() {
      const randomNum = Math.floor(Math.random() * imageCells.length);
      const removedImageIndex = imageCells[randomNum];
      for (const img of removedImgArr) {
-      img.setAttribute("src", '');
+      img.removeAttribute("src");
     }
     removedImgArr.push(removedImageIndex);
   }
   setTimeout(addOpacity, 2000);
-  cells.forEach((cell) => cell.addEventListener("click", cellClicked));
+  cells.forEach(cell => cell.addEventListener("click", cellClicked));
 }
 
 startBtn.addEventListener("click", cellBackgrounds);
 
+
 const correctCells = [];
 function cellClicked() {
   const cellIndex = this.getAttribute("cellIndex");
-  if (imageCells[cellIndex].hasAttribute("src")){
+  if(imageCells[cellIndex].src !== ''){
     this.style.backgroundColor = "#0f0";
      correctCells.push(imageCells[cellIndex])
     const combinedCellArr = [...correctCells]
-    //if the last element at the correct index is clicked win!
+    // if the last element at the correct index is clicked win!
     for (const correctCell of combinedCellArr) {
       if (combinedCellArr.length >= 9) {
         if (combinedCellArr.lastIndexOf(correctCell) === combinedCellArr.length - 1){
@@ -60,7 +77,8 @@ function cellClicked() {
         }
       }
     }
-  }} else {
+  }
+} else {
     for (const cell of cells) cell.style.backgroundColor = "#f00";
     statusText.textContent = "Ha! You lost ☹ better luck next time";
     cells.forEach((cell) => cell.removeEventListener("click", cellClicked));
@@ -70,3 +88,4 @@ function cellClicked() {
 restartBtn.addEventListener("click", function(){
   window.location.reload();
 });
+
