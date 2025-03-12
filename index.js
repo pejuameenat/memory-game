@@ -5,7 +5,7 @@ const restartBtn = document.querySelector('.restart')
 const statusText = document.querySelector('.status-text')
 const timeText = document.querySelector('.time')
 const gameOver = document.querySelector('.loser')
-
+console.log(gameOver)
 const imgArr = [
   './images/arrow-down.png',
   './images/arrow-up.png',
@@ -35,7 +35,7 @@ function countDown() {
     }
   }, 1000)
 }
-//Adding ackgrounds
+//Adding backgrounds
 function cellBackgrounds() {
   start = true
   const randomIndex = Math.floor(Math.random() * imgArr.length)
@@ -54,8 +54,9 @@ function cellBackgrounds() {
     }
     removedImgArr.push(removedImageIndex)
   }
-  setTimeout(addOpacity, 2000)
-  if(start)countDown()
+   setTimeout(addOpacity, 2000)
+   //only start the timer when the opacity has been added
+  if(start && addOpacity)countDown()
   cells.forEach((cell) => cell.addEventListener('click', cellClicked))
 }
 
@@ -84,10 +85,11 @@ function cellClicked() {
       }
     }
   } else {
-    // start = false
+   //  start = false
+   gameOver.classList.add('hide')
     for (const cell of cells) cell.style.backgroundColor = '#f00'
     statusText.textContent = 'Ha! You lost ☹ better luck next time'
-    cells.forEach((cell) => cell.removeEventListener('click', cellClicked))
+     cells.forEach((cell) => cell.removeEventListener('click', cellClicked))
   }
 }
 
