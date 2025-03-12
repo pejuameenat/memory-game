@@ -22,8 +22,8 @@ function addOpacity() {
   imageCells.forEach((img) => img.classList.add('opacity'))
 }
 // timer count down
+let timer = 10
 function countDown() {
-  let timer = 10
   const timerFuc = setInterval(function () {
     timer--
     timeText.textContent = '00:' + timer
@@ -85,8 +85,11 @@ function cellClicked() {
       }
     }
   } else {
-   //  start = false
-   gameOver.classList.add('hide')
+     //did this because the timer still counts at  least one time
+     timer = 1
+   //   if (timer === 0) {
+   //      gameOver.classList.add('hide')
+   //   }
     for (const cell of cells) cell.style.backgroundColor = '#f00'
     statusText.textContent = 'Ha! You lost ☹ better luck next time'
      cells.forEach((cell) => cell.removeEventListener('click', cellClicked))
