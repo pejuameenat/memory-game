@@ -56,7 +56,7 @@ function cellBackgrounds() {
   }
    setTimeout(addOpacity, 2000)
    //only start the timer when the opacity has been added
-  if(start && addOpacity)countDown()
+  if(start)countDown()
   cells.forEach((cell) => cell.addEventListener('click', cellClicked))
 }
 
