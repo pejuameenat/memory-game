@@ -33,7 +33,6 @@ function countDown() {
       clearInterval(timerFunc);
       cells.forEach((cell) => cell.removeEventListener("click", cellClicked));
       gameOver.textContent = "You were too slow! Game Over!";
-      // gameOver.classList.remove('hide')
     }
   }, 1000);
 }
